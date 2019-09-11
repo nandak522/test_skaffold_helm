@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hello-universe-chart.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - protocol: {{ .Values.service.protocol }}
+      targetPort: {{ .Values.service.targetPort }}
+      port: {{ .Values.service.port }}
+      nodePort: {{ .Values.service.nodePort }}
+  selector:
+    name: "{{ .Values.deploymentName }}"
